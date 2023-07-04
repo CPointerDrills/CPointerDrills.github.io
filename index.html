@@ -1,1 +1,553 @@
-hu
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://www.cs.toronto.edu/~guerzhoy/190/pointers/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Exercises</title>
+    <style>
+        .solution {
+            display: none;
+        }
+    </style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1114.0" data-gr-ext-installed="">
+    <h1>Pointer Drills</h1>
+    <h2> By <a href="https://www.cs.toronto.edu/~guerzhoy/">Michael Guerzhoy</a>. </h2>
+    <p><small>Sharing, re-distribution, and adaptation is allowed for non-commercial purposes as long as attribution to the original author is given, and as long as you notify the original author at guerzhoy@cs.toronto.edu that you intend to use the materials. Atrribution must be given in a reasonable way and in a way that does not suggest that the original author endorses any adaptation. This permission to share, re-distribute and adapt is non-transferrable.</small>
+    <br>
+    
+    <!-- Show All and Hide All solutions buttons -->
+    <button onclick="showAllSolutions()">Show All Solutions</button>
+    <button onclick="hideAllSolutions()">Hide All Solutions</button>
+
+    </p><div id="question-container">
+        <!-- Questions will be injected here -->
+    <div>
+                <p><b>Q1</b>. Define an integer variable <code>a</code> and initialize it to 42</p>
+                <button onclick="showSolution(&#39;solution0&#39;)">Show Solution</button>
+                <pre id="solution0" class="solution"><code>int a = 42;</code></pre>
+            </div><div>
+                <p><b>Q2</b>. Define a pointer to an integer variable <code>p_a</code> and initialize it to the address of <code>a</code></p>
+                <button onclick="showSolution(&#39;solution1&#39;)">Show Solution</button>
+                <pre id="solution1" class="solution"><code>int *p_a = &amp;a;</code></pre>
+            </div><div>
+                <p><b>Q3</b>. Using <code>p_a</code> and without directly using <code>a</code>, change the value of <code>a</code> to 43</p>
+                <button onclick="showSolution(&#39;solution2&#39;)">Show Solution</button>
+                <pre id="solution2" class="solution"><code>*p_a = 43;</code></pre>
+            </div><div>
+                <p><b>Q4</b>. Change the value of the pointer <code>p_a</code> to something else. Make sure that the value of <code>a</code> does not change</p>
+                <button onclick="showSolution(&#39;solution3&#39;)">Show Solution</button>
+                <pre id="solution3" class="solution"><code>int b = 44; p_a = &amp;b; // a is still 43</code></pre>
+            </div><div>
+                <p><b>Q5</b>. Define a function that takes in a pointer to an integer and changes the integer</p>
+                <button onclick="showSolution(&#39;solution4&#39;)">Show Solution</button>
+                <pre id="solution4" class="solution"><code>
+        void change_int(int *p_int)
+        {
+            *p_int = 45;
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q6</b>. Call the function from Q5 and pass in the address of <code>a</code>. Make sure that the value of <code>a</code> changes</p>
+                <button onclick="showSolution(&#39;solution5&#39;)">Show Solution</button>
+                <pre id="solution5" class="solution"><code>change_int(&amp;a);</code></pre>
+            </div><div>
+                <p><b>Q7</b>. Call the function named <code>change_int</code> without directly using <code>a</code>, but using <code>p_a</code> instead</p>
+                <button onclick="showSolution(&#39;solution6&#39;)">Show Solution</button>
+                <pre id="solution6" class="solution"><code>change_int(p_a);</code></pre>
+            </div><div>
+                <p><b>Q8</b>. Define a variable that would store the address of <code>p_a</code></p>
+                <button onclick="showSolution(&#39;solution7&#39;)">Show Solution</button>
+                <pre id="solution7" class="solution"><code>int **p_p_a; // p_p_a is an address of a value of type int *</code></pre>
+            </div><div>
+                <p><b>Q9</b>. make <code>p_p_a</code> point to <code>p_a</code></p>
+                <button onclick="showSolution(&#39;solution8&#39;)">Show Solution</button>
+                <pre id="solution8" class="solution"><code>p_p_a = &amp;p_a;</code></pre>
+            </div><div>
+                <p><b>Q10</b>. Write a function that takes in a pointer to a pointer to an integer and changes the value of the integer to 46</p>
+                <button onclick="showSolution(&#39;solution9&#39;)">Show Solution</button>
+                <pre id="solution9" class="solution"><code>
+        void change_int2(int **p_p_int)
+        {
+            **p_p_int = 46;
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q11</b>. Write a function that takes in a pointer to a pointer to an integer and changes the value of the pointer to a new address where an integer can be stored. (You will need to use malloc)</p>
+                <button onclick="showSolution(&#39;solution10&#39;)">Show Solution</button>
+                <pre id="solution10" class="solution"><code>
+        void change_int_ptr(int **p_p_int)
+        {
+            *p_p_int = malloc(sizeof(int));
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q12</b>. Call the function from (10) in order to change the value of <code>a</code> to 46. Do this using <code>p_p_a</code>, and using <code>p_a</code></p>
+                <button onclick="showSolution(&#39;solution11&#39;)">Show Solution</button>
+                <pre id="solution11" class="solution"><code>change_int2(&amp;p_a); change_int2(p_p_a); // same as above</code></pre>
+            </div><div>
+                <p><b>Q13</b>. Call the function from (11) in order to change the value of <code>p_a</code> to point to a new address. Don't use <code>p_p_a</code></p>
+                <button onclick="showSolution(&#39;solution12&#39;)">Show Solution</button>
+                <pre id="solution12" class="solution"><code>change_int_ptr(&amp;p_a);</code></pre>
+            </div><div>
+                <p><b>Q14</b>. Call the function from (11) in order to change the value of <code>p_a</code> to point to a new address. Use <code>p_p_a</code></p>
+                <button onclick="showSolution(&#39;solution13&#39;)">Show Solution</button>
+                <pre id="solution13" class="solution"><code>change_int_ptr(p_p_a);</code></pre>
+            </div><div>
+                <p><b>Q15</b>. Declare an array of integers and initialize it to {5, 6, 7}</p>
+                <button onclick="showSolution(&#39;solution14&#39;)">Show Solution</button>
+                <pre id="solution14" class="solution"><code>int arr[3] = {5, 6, 7}; // or int arr[] = {5, 6, 7};</code></pre>
+            </div><div>
+                <p><b>Q16</b>. Write a function that takes in a pointer to the first element of an array of integers and modifies the element at index 2 to 8</p>
+                <button onclick="showSolution(&#39;solution15&#39;)">Show Solution</button>
+                <pre id="solution15" class="solution"><code>
+        void change_arr(int *p_arr)
+        {
+            p_arr[2] = 8; // or *(p_arr + 2) = 8;
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q17</b>. Call the function from (16) in order to change the value of the array from (15)</p>
+                <button onclick="showSolution(&#39;solution16&#39;)">Show Solution</button>
+                <pre id="solution16" class="solution"><code>change_arr(arr); // Note that if arr is an array (not a pointer returned by malloc, &amp;arr would also work here, and arr and &amp;arr are the same thing. But if arr is a pointer, then arr and &amp;arr are different)</code></pre>
+            </div><div>
+                <p><b>Q18</b>. Create a malloc-allocated block of memory that can store 3 integers. Store it in the variable <code>p_block</code>. Then use <code>change_arr</code> to change the value at index 2</p>
+                <button onclick="showSolution(&#39;solution17&#39;)">Show Solution</button>
+                <pre id="solution17" class="solution"><code>int *p_block = malloc(3 * sizeof(int)); change_arr(p_block);</code></pre>
+            </div><div>
+                <p><b>Q19</b>. Use <code>change_int</code> from (5) to change the value of the integer stored in the block of memory from (18)</p>
+                <button onclick="showSolution(&#39;solution18&#39;)">Show Solution</button>
+                <pre id="solution18" class="solution"><code>change_int(p_block);</code></pre>
+            </div><div>
+                <p><b>Q20</b>. Use <code>change_int_ptr</code> from (11) to change the value of <code>p_block</code> to point to a new address</p>
+                <button onclick="showSolution(&#39;solution19&#39;)">Show Solution</button>
+                <pre id="solution19" class="solution"><code>change_int_ptr(&amp;p_block); // same as before</code></pre>
+            </div><div>
+                <p><b>Q21</b>. Create a an object of type student and initialize it</p>
+                <button onclick="showSolution(&#39;solution20&#39;)">Show Solution</button>
+                <pre id="solution20" class="solution"><code>
+        typedef struct student{
+           char name[1000];
+           int age;
+        };
+        student s = {"Jenny", 20};
+    </code></pre>
+            </div><div>
+                <p><b>Q22</b>. Change the name of the student to "Jennifer"</p>
+                <button onclick="showSolution(&#39;solution21&#39;)">Show Solution</button>
+                <pre id="solution21" class="solution"><code>strcpy(s.name, "Jennifer"); // cannot use equals sign (why?)</code></pre>
+            </div><div>
+                <p><b>Q23</b>. Change the age of the student to 21</p>
+                <button onclick="showSolution(&#39;solution22&#39;)">Show Solution</button>
+                <pre id="solution22" class="solution"><code>s.age = 21;</code></pre>
+            </div><div>
+                <p><b>Q24</b>. Create a pointer <code>p_s</code> to the student and initialize it to the address of the student</p>
+                <button onclick="showSolution(&#39;solution23&#39;)">Show Solution</button>
+                <pre id="solution23" class="solution"><code>student *p_s = &amp;s;</code></pre>
+            </div><div>
+                <p><b>Q25</b>. Change the name of the student to "Jenny", using <code>p_s</code></p>
+                <button onclick="showSolution(&#39;solution24&#39;)">Show Solution</button>
+                <pre id="solution24" class="solution"><code>strcpy(p_s-&gt;name, "Jenny"); // or strcpy((*p_s).name, "Jenny");</code></pre>
+            </div><div>
+                <p><b>Q26</b>. Change the age of the student to 20, using <code>p_s</code></p>
+                <button onclick="showSolution(&#39;solution25&#39;)">Show Solution</button>
+                <pre id="solution25" class="solution"><code>p_s-&gt;age = 20; // or (*p_s).age = 20;</code></pre>
+            </div><div>
+                <p><b>Q27</b>. Create a function that takes in a pointer to a student and changes the name to "Jenny"</p>
+                <button onclick="showSolution(&#39;solution26&#39;)">Show Solution</button>
+                <pre id="solution26" class="solution"><code>
+        void change_name(student *p_s)
+        {
+            strcpy(p_s-&gt;name, "Jenny"); 
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q28</b>. Create a function that takes in a pointer to a student and changes the age to 20</p>
+                <button onclick="showSolution(&#39;solution27&#39;)">Show Solution</button>
+                <pre id="solution27" class="solution"><code>
+        void change_age(student *p_s)
+        {
+            p_s-&gt;age = 20;
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q29</b>. Call the function from (27) in order to change the name of the student to "Jenny". Use <code>p_s</code> but not <code>s</code></p>
+                <button onclick="showSolution(&#39;solution28&#39;)">Show Solution</button>
+                <pre id="solution28" class="solution"><code>change_name(p_s);</code></pre>
+            </div><div>
+                <p><b>Q30</b>. Call the function from (28) in order to change the age of the student to 20. Use <code>s</code> but not <code>p_s</code></p>
+                <button onclick="showSolution(&#39;solution29&#39;)">Show Solution</button>
+                <pre id="solution29" class="solution"><code>change_age(&amp;s);</code></pre>
+            </div><div>
+                <p><b>Q31</b>. Create an array of 5 student objects</p>
+                <button onclick="showSolution(&#39;solution30&#39;)">Show Solution</button>
+                <pre id="solution30" class="solution"><code>student arr_s[5];</code></pre>
+            </div><div>
+                <p><b>Q32</b>. User the functions from change_name and change_age on the element at index 2 of the array</p>
+                <button onclick="showSolution(&#39;solution31&#39;)">Show Solution</button>
+                <pre id="solution31" class="solution"><code>change_name(&amp;(arr_s[2])); // or change_name(arr_s + 2);
+change_age(arr_s + 2); // or change_age(&amp;(arr_s[2]));</code></pre>
+            </div><div>
+                <p><b>Q33</b>. Create a malloc-allocated block of memory that can store 5 students. Store it in the variable <code>p_block_s</code></p>
+                <button onclick="showSolution(&#39;solution32&#39;)">Show Solution</button>
+                <pre id="solution32" class="solution"><code>student *p_block_s = malloc(5 * sizeof(student));</code></pre>
+            </div><div>
+                <p><b>Q34</b>. Make a function that takes in a pointer to an address of student, and sets that pointer to point to a new address where a student can be stored</p>
+                <button onclick="showSolution(&#39;solution33&#39;)">Show Solution</button>
+                <pre id="solution33" class="solution"><code>
+        void create_student(student **p_p_s)
+        {
+            *p_p_s = malloc(sizeof(student));
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q35</b>. Call the function from (34) in order to change the value of <code>p_block_s</code> to point to a new address</p>
+                <button onclick="showSolution(&#39;solution34&#39;)">Show Solution</button>
+                <pre id="solution34" class="solution"><code>create_student(&amp;p_block_s);</code></pre>
+            </div><div>
+                <p><b>Q36</b>. Call the function from (27) in order to change the name of the student at index 2 of the block of memory from (33). Use <code>p_block_s</code></p>
+                <button onclick="showSolution(&#39;solution35&#39;)">Show Solution</button>
+                <pre id="solution35" class="solution"><code>change_name(p_block_s + 2); // or change_name(&amp;(p_block_s[2]));</code></pre>
+            </div><div>
+                <p><b>Q37</b>. Create a variable <code>p_p_s</code> to store the address of <code>p_block_s</code></p>
+                <button onclick="showSolution(&#39;solution36&#39;)">Show Solution</button>
+                <pre id="solution36" class="solution"><code>student **p_p_s = &amp;p_block_s;</code></pre>
+            </div><div>
+                <p><b>Q38</b>. Without calling any function except <code>strcpy</code>, and using only <code>p_p_s</code>, change the name of the student at index 2 to "Jennifer"</p>
+                <button onclick="showSolution(&#39;solution37&#39;)">Show Solution</button>
+                <pre id="solution37" class="solution"><code>strcpy(((*p_p_s) + 2)-&gt;name, "Jennifer"); // or strcpy((*p_p_s)[2].name, "Jennifer");</code></pre>
+            </div><div>
+                <p><b>Q39</b>. In the name of the second student in the block pointed to by <code>p_p_s</code>, change the first letter to 'j' Propose four valid to do that with one line that don't involve calling a function</p>
+                <button onclick="showSolution(&#39;solution38&#39;)">Show Solution</button>
+                <pre id="solution38" class="solution"><code>((*(p_p_s))[1]).name[0] = 'j';
+(*p_p_s + 1)-&gt;name[0] = 'k';
+(*(*p_p_s + 1)).name[0] = 'l';
+p_p_s[0][1].name[0] = 'm';</code></pre>
+            </div><div>
+                <p><b>Q40</b>. Write a function that takes in a pointer to the first element of a block of addresses of students, and changes the name of the student at index 2 to "Jenny"</p>
+                <button onclick="showSolution(&#39;solution39&#39;)">Show Solution</button>
+                <pre id="solution39" class="solution"><code>
+        void change_name2(student **p_p_s)
+        {
+            strcpy((*(p_p_s + 2))-&gt;name, "Jenny");
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q41</b>. Call the function from (40) in order to change the name of the student at index 2. Use <code>p_block_s</code></p>
+                <button onclick="showSolution(&#39;solution40&#39;)">Show Solution</button>
+                <pre id="solution40" class="solution"><code>change_name2(&amp;p_block_s);</code></pre>
+            </div><div>
+                <p><b>Q42</b>. Call the function from (40) in order to change the name of the student at index 2. Use <code>p_p_s</code></p>
+                <button onclick="showSolution(&#39;solution41&#39;)">Show Solution</button>
+                <pre id="solution41" class="solution"><code>change_name2(p_p_s);</code></pre>
+            </div><div>
+                <p><b>Q43</b>. Write a function that takes in the first address of a student in a block of addresses of students, and changes the name of the student at index 2 to "Jenny"</p>
+                <button onclick="showSolution(&#39;solution42&#39;)">Show Solution</button>
+                <pre id="solution42" class="solution"><code>
+        void change_name3(student *p_s)
+        {
+            strcpy((p_s + 2)-&gt;name, "Jenny");  //or strcpy((ps[2].name, "Jenny");
+        }
+    </code></pre>
+            </div><div>
+                <p><b>Q44</b>. Call the function from (43) in order to change the name of the student at index 2. Use <code>p_block_s</code></p>
+                <button onclick="showSolution(&#39;solution43&#39;)">Show Solution</button>
+                <pre id="solution43" class="solution"><code>change_name3(p_block_s);</code></pre>
+            </div><div>
+                <p><b>Q45</b>. Call the function from (43) in order to change the name of the student at index 2. Use <code>p_p_s</code></p>
+                <button onclick="showSolution(&#39;solution44&#39;)">Show Solution</button>
+                <pre id="solution44" class="solution"><code>change_name3(*p_p_s);</code></pre>
+            </div></div>
+
+    <script>
+        var questions = [
+            {
+                text: "<b>Q1</b>. Define an integer variable <code>a</code> and initialize it to 42",
+                solution: "int a = 42;"
+            },
+            {
+                text: "<b>Q2</b>. Define a pointer to an integer variable <code>p_a</code> and initialize it to the address of <code>a</code>",
+                solution: "int *p_a = &a;"
+            },
+            {
+                text: "<b>Q3</b>. Using <code>p_a</code> and without directly using <code>a</code>, change the value of <code>a</code> to 43",
+                solution: "*p_a = 43;"
+            },
+            {
+    text: "<b>Q4</b>. Change the value of the pointer <code>p_a</code> to something else. Make sure that the value of <code>a</code> does not change",
+    solution: "int b = 44; p_a = &b; // a is still 43"
+},
+{
+    text: "<b>Q5</b>. Define a function that takes in a pointer to an integer and changes the integer",
+    solution: `
+        void change_int(int *p_int)
+        {
+            *p_int = 45;
+        }
+    `
+},
+{
+    text: "<b>Q6</b>. Call the function from Q5 and pass in the address of <code>a</code>. Make sure that the value of <code>a</code> changes",
+    solution: "change_int(&a);"
+},
+{
+    text: "<b>Q7</b>. Call the function named <code>change_int</code> without directly using <code>a</code>, but using <code>p_a</code> instead",
+    solution: "change_int(p_a);"
+},
+{
+    text: "<b>Q8</b>. Define a variable that would store the address of <code>p_a</code>",
+    solution: "int **p_p_a; // p_p_a is an address of a value of type int *"
+},
+{
+    text: "<b>Q9</b>. make <code>p_p_a</code> point to <code>p_a</code>",
+    solution: "p_p_a = &p_a;"
+},
+{
+    text: "<b>Q10</b>. Write a function that takes in a pointer to a pointer to an integer and changes the value of the integer to 46",
+    solution: `
+        void change_int2(int **p_p_int)
+        {
+            **p_p_int = 46;
+        }
+    `
+},
+{
+    text: "<b>Q11</b>. Write a function that takes in a pointer to a pointer to an integer and changes the value of the pointer to a new address where an integer can be stored. (You will need to use malloc)",
+    solution: `
+        void change_int_ptr(int **p_p_int)
+        {
+            *p_p_int = malloc(sizeof(int));
+        }
+    `
+},
+{
+    text: "<b>Q12</b>. Call the function from (10) in order to change the value of <code>a</code> to 46. Do this using <code>p_p_a</code>, and using <code>p_a</code>",
+    solution: "change_int2(&p_a); change_int2(p_p_a); // same as above"
+},
+{
+    text: "<b>Q13</b>. Call the function from (11) in order to change the value of <code>p_a</code> to point to a new address. Don't use <code>p_p_a</code>",
+    solution: "change_int_ptr(&p_a);"
+},
+{
+    text: "<b>Q14</b>. Call the function from (11) in order to change the value of <code>p_a</code> to point to a new address. Use <code>p_p_a</code>",
+    solution: "change_int_ptr(p_p_a);"
+},
+{
+    text: "<b>Q15</b>. Declare an array of integers and initialize it to {5, 6, 7}",
+    solution: "int arr[3] = {5, 6, 7}; // or int arr[] = {5, 6, 7};"
+},
+{
+    text: "<b>Q16</b>. Write a function that takes in a pointer to the first element of an array of integers and modifies the element at index 2 to 8",
+    solution: `
+        void change_arr(int *p_arr)
+        {
+            p_arr[2] = 8; // or *(p_arr + 2) = 8;
+        }
+    `
+},
+{
+    text: "<b>Q17</b>. Call the function from (16) in order to change the value of the array from (15)",
+    solution: "change_arr(arr); // Note that if arr is an array (not a pointer returned by malloc, &arr would also work here, and arr and &arr are the same thing. But if arr is a pointer, then arr and &arr are different)"
+},
+{
+    text: "<b>Q18</b>. Create a malloc-allocated block of memory that can store 3 integers. Store it in the variable <code>p_block</code>. Then use <code>change_arr</code> to change the value at index 2",
+    solution: "int *p_block = malloc(3 * sizeof(int)); change_arr(p_block);"
+},
+{
+    text: "<b>Q19</b>. Use <code>change_int</code> from (5) to change the value of the integer stored in the block of memory from (18)",
+    solution: "change_int(p_block);"
+},
+{
+    text: "<b>Q20</b>. Use <code>change_int_ptr</code> from (11) to change the value of <code>p_block</code> to point to a new address",
+    solution: "change_int_ptr(&p_block); // same as before"
+},
+
+{
+    text: "<b>Q21</b>. Create a an object of type student and initialize it",
+    solution: `
+        typedef struct student{
+           char name[1000];
+           int age;
+        };
+        student s = {"Jenny", 20};
+    `
+},
+{
+    text: "<b>Q22</b>. Change the name of the student to \"Jennifer\"",
+    solution: "strcpy(s.name, \"Jennifer\"); // cannot use equals sign (why?)"
+},
+{
+    text: "<b>Q23</b>. Change the age of the student to 21",
+    solution: "s.age = 21;"
+},
+{
+    text: "<b>Q24</b>. Create a pointer <code>p_s</code> to the student and initialize it to the address of the student",
+    solution: "student *p_s = &s;"
+},
+{
+    text: "<b>Q25</b>. Change the name of the student to \"Jenny\", using <code>p_s</code>",
+    solution: "strcpy(p_s->name, \"Jenny\"); // or strcpy((*p_s).name, \"Jenny\");"
+},
+{
+    text: "<b>Q26</b>. Change the age of the student to 20, using <code>p_s</code>",
+    solution: "p_s->age = 20; // or (*p_s).age = 20;"
+},
+{
+    text: "<b>Q27</b>. Create a function that takes in a pointer to a student and changes the name to \"Jenny\"",
+    solution: `
+        void change_name(student *p_s)
+        {
+            strcpy(p_s->name, \"Jenny\"); 
+        }
+    `
+},
+{
+    text: "<b>Q28</b>. Create a function that takes in a pointer to a student and changes the age to 20",
+    solution: `
+        void change_age(student *p_s)
+        {
+            p_s->age = 20;
+        }
+    `
+},
+{
+    text: "<b>Q29</b>. Call the function from (27) in order to change the name of the student to \"Jenny\". Use <code>p_s</code> but not <code>s</code>",
+    solution: "change_name(p_s);"
+},
+{
+    text: "<b>Q30</b>. Call the function from (28) in order to change the age of the student to 20. Use <code>s</code> but not <code>p_s</code>",
+    solution: "change_age(&s);"
+},
+{
+    text: "<b>Q31</b>. Create an array of 5 student objects",
+    solution: "student arr_s[5];"
+},
+{
+    text: "<b>Q32</b>. User the functions from change_name and change_age on the element at index 2 of the array",
+    solution: "change_name(&(arr_s[2])); // or change_name(arr_s + 2);\nchange_age(arr_s + 2); // or change_age(&(arr_s[2]));"
+},
+{
+    text: "<b>Q33</b>. Create a malloc-allocated block of memory that can store 5 students. Store it in the variable <code>p_block_s</code>",
+    solution: "student *p_block_s = malloc(5 * sizeof(student));"
+},
+{
+    text: "<b>Q34</b>. Make a function that takes in a pointer to an address of student, and sets that pointer to point to a new address where a student can be stored",
+    solution: `
+        void create_student(student **p_p_s)
+        {
+            *p_p_s = malloc(sizeof(student));
+        }
+    `
+},
+{
+    text: "<b>Q35</b>. Call the function from (34) in order to change the value of <code>p_block_s</code> to point to a new address",
+    solution: "create_student(&p_block_s);"
+},
+
+{
+    text: "<b>Q36</b>. Call the function from (27) in order to change the name of the student at index 2 of the block of memory from (33). Use <code>p_block_s</code>",
+    solution: "change_name(p_block_s + 2); // or change_name(&(p_block_s[2]));"
+},
+{
+    text: "<b>Q37</b>. Create a variable <code>p_p_s</code> to store the address of <code>p_block_s</code>",
+    solution: "student **p_p_s = &p_block_s;"
+},
+{
+    text: "<b>Q38</b>. Without calling any function except <code>strcpy</code>, and using only <code>p_p_s</code>, change the name of the student at index 2 to \"Jennifer\"",
+    solution: "strcpy(((*p_p_s) + 2)->name, \"Jennifer\"); // or strcpy((*p_p_s)[2].name, \"Jennifer\");"
+},
+{
+    text: "<b>Q39</b>. In the name of the second student in the block pointed to by <code>p_p_s</code>, change the first letter to 'j' Propose four valid to do that with one line that don't involve calling a function",
+    solution: "((*(p_p_s))[1]).name[0] = 'j';\n(*p_p_s + 1)->name[0] = 'k';\n(*(*p_p_s + 1)).name[0] = 'l';\np_p_s[0][1].name[0] = 'm';"
+},
+{
+    text: "<b>Q40</b>. Write a function that takes in a pointer to the first element of a block of addresses of students, and changes the name of the student at index 2 to \"Jenny\"",
+    solution: `
+        void change_name2(student **p_p_s)
+        {
+            strcpy((*(p_p_s + 2))->name, "Jenny");
+        }
+    `
+},
+{
+    text: "<b>Q41</b>. Call the function from (40) in order to change the name of the student at index 2. Use <code>p_block_s</code>",
+    solution: "change_name2(&p_block_s);"
+},
+{
+    text: "<b>Q42</b>. Call the function from (40) in order to change the name of the student at index 2. Use <code>p_p_s</code>",
+    solution: "change_name2(p_p_s);"
+},
+{
+    text: "<b>Q43</b>. Write a function that takes in the first address of a student in a block of addresses of students, and changes the name of the student at index 2 to \"Jenny\"",
+    solution: `
+        void change_name3(student *p_s)
+        {
+            strcpy((p_s + 2)->name, "Jenny");  //or strcpy((ps[2].name, "Jenny");
+        }
+    `
+},
+{
+    text: "<b>Q44</b>. Call the function from (43) in order to change the name of the student at index 2. Use <code>p_block_s</code>",
+    solution: "change_name3(p_block_s);"
+},
+{
+    text: "<b>Q45</b>. Call the function from (43) in order to change the name of the student at index 2. Use <code>p_p_s</code>",
+    solution: "change_name3(*p_p_s);"
+}
+
+            
+            // And so on for all questions
+        ];
+
+        var questionContainer = document.getElementById("question-container");
+
+        questions.forEach(function(question, index) {
+            var questionElement = document.createElement('div');
+            questionElement.innerHTML = `
+                <p>${question.text}</p>
+                <button onclick="showSolution('solution${index}')">Show Solution</button>
+                <pre id="solution${index}" class="solution"><code>${question.solution}</code></pre>
+            `;
+            questionContainer.appendChild(questionElement);
+        });
+
+        function showSolution(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function showAllSolutions() {
+            var solutions = document.getElementsByClassName('solution');
+            for (var i = 0; i < solutions.length; i++) {
+                solutions[i].style.display = 'block';
+            }
+        }
+
+        function hideAllSolutions() {
+            var solutions = document.getElementsByClassName('solution');
+            for (var i = 0; i < solutions.length; i++) {
+                solutions[i].style.display = 'none';
+            }
+        }
+    </script>
+
+
+
+</body><auto-scroll><template shadowrootmode="closed"><div style="transform: translateZ(0px); display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 2147483647; background-repeat: no-repeat;"></div></template></auto-scroll><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
